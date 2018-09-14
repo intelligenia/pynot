@@ -271,38 +271,39 @@ class Config(SingletonModel):
 class PyNot(object):
     @classmethod
     def sync_settings(cls):
-        for category_slug in settings.PYNOT_SETTINGS:
-            category, created = Category.objects.get_or_create(slug=category_slug)
-            new_name = settings.PYNOT_SETTINGS[category_slug]["name"]
-            if category.name != new_name:
-                category.name = new_name
-                category.save()
+        if settings.PYNOT_SETTINGS: 
+            for category_slug in settings.PYNOT_SETTINGS:
+                category, created = Category.objects.get_or_create(slug=category_slug)
+                new_name = settings.PYNOT_SETTINGS[category_slug]["name"]
+                if category.name != new_name:
+                    category.name = new_name
+                    category.save()
 
-            event_config = settings.PYNOT_SETTINGS[category_slug]["events"]
-            for event_slug in event_config:
-                event, created = Event.objects.get_or_create(
-                    category=category,
-                    slug=event_slug
-                )
-                new_name = event_config[event_slug]["name"]
-                new_description = event_config[event_slug]["description"]
-                if event.name!=new_name or event.description!=new_description:
-                    event.name = new_name
-                    event.description = new_description
-                    event.save()
-
-                parameters_config = event_config[event_slug]["parameters"]
-                for parameter_slug in parameters_config:
-                    parameter, created = Parameter.objects.get_or_create(
-                        name=parameter_slug,
-                        event=event
+                event_config = settings.PYNOT_SETTINGS[category_slug]["events"]
+                for event_slug in event_config:
+                    event, created = Event.objects.get_or_create(
+                        category=category,
+                        slug=event_slug
                     )
-                    new_name = parameters_config[parameter_slug]["human_name"]
-                    new_serializer = parameters_config[parameter_slug]["serializer"]
-                    if parameter.name != new_name or parameter.description != new_description:
-                        parameter.human_name = new_name
-                        parameter.serializer = new_serializer
-                        parameter.save()
+                    new_name = event_config[event_slug]["name"]
+                    new_description = event_config[event_slug]["description"]
+                    if event.name!=new_name or event.description!=new_description:
+                        event.name = new_name
+                        event.description = new_description
+                        event.save()
+
+                    parameters_config = event_config[event_slug]["parameters"]
+                    for parameter_slug in parameters_config:
+                        parameter, created = Parameter.objects.get_or_create(
+                            name=parameter_slug,
+                            event=event
+                        )
+                        new_name = parameters_config[parameter_slug]["human_name"]
+                        new_serializer = parameters_config[parameter_slug]["serializer"]
+                        if parameter.name != new_name or parameter.description != new_description:
+                            parameter.human_name = new_name
+                            parameter.serializer = new_serializer
+                            parameter.save()
 
     @classmethod
     def event(cls, slug):

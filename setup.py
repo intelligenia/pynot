@@ -34,6 +34,5 @@ setup(
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Framework :: Django',
-        'License :: OSI Approved :: Apache 2.0',
     ],
 )
