@@ -271,7 +271,7 @@ class Config(SingletonModel):
 class PyNot(object):
     @classmethod
     def sync_settings(cls):
-        if settings.PYNOT_SETTINGS: 
+        if hasattr(settings, "PYNOT_SETTINGS"):
             for category_slug in settings.PYNOT_SETTINGS:
                 category, created = Category.objects.get_or_create(slug=category_slug)
                 new_name = settings.PYNOT_SETTINGS[category_slug]["name"]
