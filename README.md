@@ -18,7 +18,7 @@ Pynot is a Django library that helps with the email or web notifications. It is 
 so you will define events, then you will define notifications that should be sent for each event,
 and finally you can fire the events inside your application code
 
-Pynot provides 3 main characteristics:
+Pynot provides 4 main characteristics:
 
 * Events declaration
 * Definition of the notifications of each event
