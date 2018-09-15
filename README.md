@@ -1,4 +1,4 @@
-# [Pynot][docs]
+# Pynot
 
 [![pypi-version]][pypi]
 
