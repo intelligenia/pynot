@@ -89,8 +89,8 @@ And thats all, Pynot is working properly, but... you don't have any defined even
 We are going to configure 2 events, like `'registration'` event, and a `'new_offer`' event.
 To do that, we need to declare the serializers, in this case, we have the next serializers:
 
-    muapp.serializers.UserSerializer
-    muapp.serializers.OfferSerializer
+    myapp.serializers.UserSerializer
+    myapp.serializers.OfferSerializer
 
 Therefore we can define the events in our `'settings.py'`, taking into account that the
 `'registration'` event will receive the registered user as parameter, and a `'new_offer`' event
